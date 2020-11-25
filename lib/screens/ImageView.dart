@@ -5,7 +5,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:image/image.dart' as ImageResize;
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
@@ -234,31 +233,6 @@ class _ImageViewState extends State<ImageView> {
         // _adjustImageSize("${dir.path}/myimage.jpeg");
         _setWallpaper("${dir.path}/myimage.jpeg", screenType);
       });
-
-      // progressString = Wallpaper.ImageDownloadProgress(widget.imgPath);
-      // progressString.listen((data) {
-      //   print("DataReceived: " + data);
-      // }, onDone: () async {
-      //   print("Task Done");
-      //   //accessing external directory in order to get the access to path where image is stored in device
-      //   final dir = await getExternalStorageDirectory();
-      //   // resizing to fit the screen size of device but qualtiy poor
-      //   // _adjustImageSize("${dir.path}/myimage.jpeg");
-
-      //   // //setting the wallpaper by setting the image path and the option type
-      //   _setWallpaper("${dir.path}/myimage.jpeg", screenType);
-
-      // }, onError: (error) {
-      //   print("Some Error");
-      // });
     }
-  }
-
-  _adjustImageSize (imageFile) async {
-      ImageResize.Image image = ImageResize.decodeImage(File(imageFile).readAsBytesSync());
-      // Resize the image based on device screen dimensions? thumbnail (maintaining the aspect ratio).
-      ImageResize.Image thumbnail = ImageResize.copyResize(image, width: MediaQuery.of(context).size.width.toInt(), height: MediaQuery.of(context).size.height.toInt());
-      // Save the image as a JPG.
-      File(imageFile)..writeAsBytesSync(ImageResize.encodeJpg(thumbnail));
   }
 }
